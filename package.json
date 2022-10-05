@@ -1,6 +1,6 @@
 {
   "name": "@exact-realty/esbuild-plugin-inline-js",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "esbuild plugin for external scripts",
   "main": "dist/index.js",
   "module": "./dist/index.mjs",

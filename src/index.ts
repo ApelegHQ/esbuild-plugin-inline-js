@@ -37,8 +37,7 @@ export default (
 			build.onLoad(
 				{
 					filter: /.*/,
-					namespace:
-						'@exact-realty/esbuild-plugin-inline-js/loader',
+					namespace: '@exact-realty/esbuild-plugin-inline-js/loader',
 				},
 				async ({ path }) => {
 					const outfile = randomBytes(9).toString('base64');
@@ -67,8 +66,6 @@ export default (
 						};
 					}
 
-					console.log({path});
-
 					return {
 						contents: `
 						import path from ${JSON.stringify(path)};
@@ -94,7 +91,11 @@ export default (
 			build.onResolve(
 				{ filter: /\.inline\.(js|jsx|ts|tsx)$/ },
 				async ({ path, resolveDir, pluginData, namespace }) => {
-					if (pluginData === skipResolve || namespace === '@exact-realty/esbuild-plugin-inline-js/loader') {
+					if (
+						pluginData === skipResolve ||
+						namespace ===
+							'@exact-realty/esbuild-plugin-inline-js/loader'
+					) {
 						return;
 					}
 
@@ -123,13 +124,11 @@ export default (
 			build.onResolve(
 				{
 					filter: /.*/,
-					namespace:
-						'@exact-realty/esbuild-plugin-inline-js/loader',
+					namespace: '@exact-realty/esbuild-plugin-inline-js/loader',
 				},
 				({ path, pluginData }) => ({
 					external: false,
-					namespace:
-						'@exact-realty/esbuild-plugin-inline-js/content',
+					namespace: '@exact-realty/esbuild-plugin-inline-js/content',
 					path: path.replace(/\.inline\.[jt]sx?$/, '.js'),
 					pluginData: pluginData,
 				}),
@@ -138,8 +137,7 @@ export default (
 			build.onLoad(
 				{
 					filter: /.*/,
-					namespace:
-						'@exact-realty/esbuild-plugin-inline-js/content',
+					namespace: '@exact-realty/esbuild-plugin-inline-js/content',
 				},
 				({ pluginData }) => ({
 					contents: pluginData,
