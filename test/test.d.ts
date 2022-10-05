@@ -21,3 +21,12 @@ declare module '*.inline.ts' {
 
 	export default content;
 }
+
+declare module '*.inline.js' {
+	const content: string;
+	export const contentBase64: string;
+	export const path: string;
+	export const sri: string;
+
+	export default content;
+}

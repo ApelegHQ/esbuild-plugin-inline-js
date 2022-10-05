@@ -15,6 +15,8 @@
 
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { join } from 'node:path';
+import { readFileSync } from 'node:fs';
 
 import * as x from './external.inline.ts';
 
@@ -29,6 +31,12 @@ assert.equal(
 );
 assert.equal(new Function('return ' + x.default)(), 'Hello, World!');
 assert.equal(
-	x.path.replace(/external-[^.]+\.js$/, 'external.js'),
+	x.path.replace(/\/(external)-[^.]+\.js$/, '/$1.js'),
 	'http://invalid/assets/external.js',
+);
+
+const content = readFileSync(join(__dirname, x.path.split('/').pop()));
+assert.equal(
+	x.sri,
+	'sha384-' + createHash('sha384').update(content).digest('base64'),
 );

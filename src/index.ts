@@ -40,7 +40,7 @@ export default (
 					namespace: '@exact-realty/esbuild-plugin-inline-js/loader',
 				},
 				async ({ path }) => {
-					const outfile = randomBytes(9).toString('base64');
+					const outfile = randomBytes(9).toString('base64url');
 					const result = await esbuild.build({
 						...config,
 						entryPoints: [path],
