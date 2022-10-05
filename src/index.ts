@@ -1,4 +1,4 @@
-/* Copyright © 2021 Exact Realty Limited.
+/* Copyright © 2022 Exact Realty Limited.
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -37,7 +37,8 @@ export default (
 			build.onLoad(
 				{
 					filter: /.*/,
-					namespace: '@exact-realty/esbuild-plugin-inline-js/loader',
+					namespace:
+						'@exact-realty/esbuild-plugin-inline-js/loader',
 				},
 				async ({ path }) => {
 					const outfile = randomBytes(9).toString('base64');
@@ -66,8 +67,12 @@ export default (
 						};
 					}
 
+					console.log({path});
+
 					return {
-						contents: `const content = ${JSON.stringify(
+						contents: `
+						import path from ${JSON.stringify(path)};
+						const content = ${JSON.stringify(
 							Buffer.from(output.contents).toString('utf8'),
 						)};
 						const contentBase64 = ${JSON.stringify(
@@ -79,8 +84,9 @@ export default (
 									.update(output.contents)
 									.digest('base64'),
 						)};
-						export {content as default, contentBase64, sri};`,
+						export {content as default, contentBase64, path, sri};`,
 						loader: 'js',
+						pluginData: output.contents,
 					};
 				},
 			);
@@ -88,7 +94,7 @@ export default (
 			build.onResolve(
 				{ filter: /\.inline\.(js|jsx|ts|tsx)$/ },
 				async ({ path, resolveDir, pluginData, namespace }) => {
-					if (pluginData === skipResolve) {
+					if (pluginData === skipResolve || namespace === '@exact-realty/esbuild-plugin-inline-js/loader') {
 						return;
 					}
 
@@ -112,6 +118,33 @@ export default (
 						watchFiles: [result.path],
 					};
 				},
+			);
+
+			build.onResolve(
+				{
+					filter: /.*/,
+					namespace:
+						'@exact-realty/esbuild-plugin-inline-js/loader',
+				},
+				({ path, pluginData }) => ({
+					external: false,
+					namespace:
+						'@exact-realty/esbuild-plugin-inline-js/content',
+					path: path.replace(/\.inline\.[jt]sx?$/, '.js'),
+					pluginData: pluginData,
+				}),
+			);
+
+			build.onLoad(
+				{
+					filter: /.*/,
+					namespace:
+						'@exact-realty/esbuild-plugin-inline-js/content',
+				},
+				({ pluginData }) => ({
+					contents: pluginData,
+					loader: 'file',
+				}),
 			);
 		},
 	};

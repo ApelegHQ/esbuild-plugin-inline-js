@@ -1,7 +1,7 @@
 {
   "name": "@exact-realty/esbuild-plugin-inline-js",
-  "version": "1.0.4",
-  "description": "esbuild plugin for inline scripts",
+  "version": "1.0.5",
+  "description": "esbuild plugin for external scripts",
   "main": "dist/index.js",
   "module": "./dist/index.mjs",
   "exports": {
@@ -49,8 +49,8 @@
   "keywords": [
     "esbuild",
     "esbuild plugin",
-    "inline",
-    "inline scripts",
+    "external",
+    "external scripts",
     "sri"
   ]
 }

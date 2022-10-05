@@ -1,4 +1,4 @@
-/* Copyright © 2022 Exact Realty Limited.
+/* Copyright © 2021 Exact Realty Limited.
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -13,11 +13,22 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-declare module '*.inline.ts' {
-	const content: string;
-	export const contentBase64: string;
-	export const path: string;
-	export const sri: string;
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 
-	export default content;
-}
+import * as x from './external.inline.ts';
+
+assert.notEqual(x.default, '');
+assert.equal(
+	x.contentBase64,
+	Buffer.from(x.default, 'utf-8').toString('base64'),
+);
+assert.equal(
+	x.sri,
+	'sha384-' + createHash('sha384').update(x.default).digest('base64'),
+);
+assert.equal(new Function('return ' + x.default)(), 'Hello, World!');
+assert.equal(
+	x.path.replace(/external-[^.]+\.js$/, 'external.js'),
+	'http://invalid/assets/external.js',
+);

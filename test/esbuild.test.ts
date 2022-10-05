@@ -21,7 +21,7 @@ import assert from 'node:assert/strict';
 
 describe('Test', () => {
 	describe('Import results in the right values', () => {
-		for (const test of ['test-simple', 'test-default-import']) {
+		for (const test of ['test-simple', 'test-default-import', 'test-path-import']) {
 			it(test, async () => {
 				await esbuild
 					.build({
