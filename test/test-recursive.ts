@@ -15,7 +15,7 @@
 
 import assert from 'node:assert/strict';
 
-import x from './sample.inline.ts';
+import x from './test-recursive-outer.inline.ts';
 
 assert.notEqual(x, '');
 assert.equal((new Function(x)(), globalThis.result), 'Hello, World!');

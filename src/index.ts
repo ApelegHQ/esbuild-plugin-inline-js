@@ -90,8 +90,10 @@ export default (
 
 			build.onResolve(
 				{ filter: /\.inline\.(js|jsx|ts|tsx)$/ },
-				async ({ path, resolveDir, pluginData, namespace }) => {
+				async (a) => {
+					const { path, resolveDir, pluginData, namespace, kind } = a;
 					if (
+						kind === 'entry-point' ||
 						pluginData === skipResolve ||
 						namespace ===
 							'@exact-realty/esbuild-plugin-inline-js/loader'
@@ -102,6 +104,7 @@ export default (
 					const result = await build.resolve(path, {
 						resolveDir,
 						pluginData: skipResolve,
+						kind: 'require-resolve',
 						namespace,
 					});
 

@@ -96,4 +96,33 @@ describe('Test', () => {
 			});
 		}
 	});
+
+	describe('Recursive imports work', () => {
+		for (const test of ['test-recursive']) {
+			it(test, async () => {
+				await esbuild
+					.build({
+						entryPoints: [path.join(__dirname, `${test}.ts`)],
+						outdir: path.join(__dirname, 'build'),
+						bundle: true,
+						format: 'cjs',
+						publicPath: 'http://invalid/assets',
+						plugins: [
+							is({
+								plugins: [is()],
+							}),
+						],
+						platform: 'node',
+					})
+					.then(() => {
+						return import(path.join(__dirname, `build/${test}.js`));
+					})
+					.catch((e) => {
+						console.error('Error while building');
+						console.dir(e);
+						process.exit(1);
+					});
+			});
+		}
+	});
 });

@@ -1,3 +1,3 @@
 (function () {
-	return 'Hello, World!';
+	this.result = 'Hello, World!';
 })();

@@ -29,7 +29,7 @@ assert.equal(
 	x.sri,
 	'sha384-' + createHash('sha384').update(x.default).digest('base64'),
 );
-assert.equal(new Function('return ' + x.default)(), 'Hello, World!');
+assert.equal((new Function(x.default)(), globalThis.result), 'Hello, World!');
 assert.equal(
 	x.path.replace(/\/(external)-[^.]+\.js$/, '/$1.js'),
 	'http://invalid/assets/external.js',
