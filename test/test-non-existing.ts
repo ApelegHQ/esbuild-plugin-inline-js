@@ -13,4 +13,4 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-export * as default from './this.file.does.not.exist.inline.ts';
+export * as default from 'inline:./this.file.does.not.exist.inline.ts';

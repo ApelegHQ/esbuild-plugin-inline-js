@@ -13,16 +13,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-declare module '*.inline.ts' {
-	const content: string;
-	export const contentBase64: string;
-	export const path: string;
-	export const sri: string;
-
-	export default content;
-}
-
-declare module '*.inline.js' {
+declare module 'inline:*' {
 	const content: string;
 	export const contentBase64: string;
 	export const path: string;

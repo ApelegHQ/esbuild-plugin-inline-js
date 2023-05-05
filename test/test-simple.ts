@@ -16,7 +16,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 
-import * as x from './sample.inline.ts';
+import * as x from 'inline:./sample.inline.ts';
 
 assert.notEqual(x.default, '');
 assert.equal(

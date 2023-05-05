@@ -88,41 +88,39 @@ export default (
 				},
 			);
 
-			build.onResolve(
-				{ filter: /\.inline\.(js|jsx|ts|tsx)$/ },
-				async (a) => {
-					const { path, resolveDir, pluginData, namespace, kind } = a;
-					if (
-						kind === 'entry-point' ||
-						pluginData === skipResolve ||
-						namespace ===
-							'@exact-realty/esbuild-plugin-inline-js/loader'
-					) {
-						return;
-					}
+			build.onResolve({ filter: /^inline:/ }, async (a) => {
+				const { path, resolveDir, pluginData, namespace, kind } = a;
+				if (
+					kind === 'entry-point' ||
+					pluginData === skipResolve ||
+					namespace ===
+						'@exact-realty/esbuild-plugin-inline-js/loader'
+				) {
+					return;
+				}
 
-					const result = await build.resolve(path, {
-						resolveDir,
-						pluginData: skipResolve,
-						kind: 'require-resolve',
-						namespace,
-					});
+				const pathWP = path.slice(7);
 
-					if (result.errors.length > 0) {
-						return { errors: result.errors };
-					}
+				const result = await build.resolve(pathWP, {
+					resolveDir,
+					pluginData: skipResolve,
+					kind: 'require-resolve',
+					namespace,
+				});
 
-					return {
-						external: false,
-						namespace:
-							'@exact-realty/esbuild-plugin-inline-js/loader',
-						path: result.path,
-						suffix: undefined,
-						watchDirs: [],
-						watchFiles: [result.path],
-					};
-				},
-			);
+				if (result.errors.length > 0) {
+					return { errors: result.errors };
+				}
+
+				return {
+					external: false,
+					namespace: '@exact-realty/esbuild-plugin-inline-js/loader',
+					path: result.path,
+					suffix: undefined,
+					watchDirs: [],
+					watchFiles: [result.path],
+				};
+			});
 
 			build.onResolve(
 				{

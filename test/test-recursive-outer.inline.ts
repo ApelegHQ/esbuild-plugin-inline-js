@@ -1,4 +1,4 @@
-import * as inner from './test-recursive-inner.inline.ts';
+import * as inner from 'inline:./test-recursive-inner.inline.ts';
 
 (function () {
 	new Function(inner.default)();

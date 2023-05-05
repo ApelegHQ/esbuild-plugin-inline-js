@@ -18,7 +18,7 @@ import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
 
-import * as x from './external.inline.ts';
+import * as x from 'inline:./external.inline.ts';
 
 assert.notEqual(x.default, '');
 assert.equal(
