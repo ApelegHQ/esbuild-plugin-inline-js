@@ -1,6 +1,6 @@
 {
   "name": "@exact-realty/esbuild-plugin-inline-js",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "esbuild plugin for inline scripts",
   "main": "dist/index.js",
   "module": "./dist/index.mjs",
@@ -19,7 +19,6 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
-    "postinstall": "exit 0",
     "version": "npm run lint && git add -A src",
     "postversion": "git push && git push --tags"
   },
@@ -31,10 +30,10 @@
   "license": "ISC",
   "devDependencies": {
     "@types/mocha": "^10.0.1",
-    "@types/node": "^20.4.2",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "esbuild": "^0.18.13",
+    "@types/node": "^20.4.4",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "esbuild": "^0.18.16",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^5.0.0",
@@ -44,7 +43,7 @@
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "esbuild": "^0.18.13"
+    "esbuild": "^0.17.0 || ^0.18.0"
   },
   "keywords": [
     "esbuild",

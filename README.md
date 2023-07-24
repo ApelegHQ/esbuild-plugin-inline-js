@@ -1,5 +1,12 @@
 # esbuild plugin for inline scripts
 
+ [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Exact-Realty_esbuild-plugin-inline-js&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Exact-Realty_esbuild-plugin-inline-js)
+ [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Exact-Realty_esbuild-plugin-inline-js&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Exact-Realty_esbuild-plugin-inline-js)
+ [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Exact-Realty_esbuild-plugin-inline-js&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Exact-Realty_esbuild-plugin-inline-js)
+ [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Exact-Realty_esbuild-plugin-inline-js&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Exact-Realty_esbuild-plugin-inline-js)
+ [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Exact-Realty_esbuild-plugin-inline-js&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Exact-Realty_esbuild-plugin-inline-js)
+ ![NPM Downloads](https://img.shields.io/npm/dw/@exact-realty/esbuild-plugin-inline-js?style=flat-square)
+
 ## How to use
 
 ### Installing
