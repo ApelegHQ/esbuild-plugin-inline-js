@@ -34,7 +34,7 @@ describe('Test', () => {
 						bundle: true,
 						format: 'cjs',
 						publicPath: 'http://invalid/assets',
-						plugins: [is()],
+						plugins: [is({ format: 'esm' })],
 						platform: 'node',
 					})
 					.then(() => {
@@ -61,7 +61,7 @@ describe('Test', () => {
 						bundle: true,
 						format: 'cjs',
 						publicPath: 'http://invalid/assets',
-						plugins: [is()],
+						plugins: [is({ format: 'esm' })],
 						platform: 'node',
 						logLevel: 'silent',
 					})
@@ -109,7 +109,8 @@ describe('Test', () => {
 						publicPath: 'http://invalid/assets',
 						plugins: [
 							is({
-								plugins: [is()],
+								format: 'esm',
+								plugins: [is({ format: 'esm' })],
 							}),
 						],
 						platform: 'node',

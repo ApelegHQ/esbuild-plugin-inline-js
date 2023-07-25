@@ -42,13 +42,13 @@ export default (
 				async ({ path }) => {
 					const outfile = randomBytes(9).toString('base64url');
 					const result = await esbuild.build({
+						target: build.initialOptions.target,
+						format: build.initialOptions.format,
 						...config,
 						entryPoints: [path],
 						bundle: true,
 						minify: true,
 						outfile: outfile,
-						target: 'es2017',
-						format: 'esm',
 						write: false,
 					});
 
