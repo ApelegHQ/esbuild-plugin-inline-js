@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Exact-Realty/esbuild-plugin-responsive-images.git"
+    "url": "git+https://github.com/Exact-Realty/esbuild-plugin-inline-js.git"
   },
   "author": "Exact Realty Limited",
   "license": "ISC",
