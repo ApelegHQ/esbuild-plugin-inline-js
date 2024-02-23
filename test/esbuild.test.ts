@@ -15,9 +15,14 @@
 
 import esbuild from 'esbuild';
 import path from 'node:path';
-import is from '../src';
+import is from '../src/index.js';
 
 import assert from 'node:assert/strict';
+import { dirname } from 'node:path';
+import { describe, it } from 'node:test';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe('Test', () => {
 	describe('Import results in the right values', () => {
@@ -32,7 +37,7 @@ describe('Test', () => {
 						entryPoints: [path.join(__dirname, `${test}.ts`)],
 						outdir: path.join(__dirname, 'build'),
 						bundle: true,
-						format: 'cjs',
+						format: 'esm',
 						publicPath: 'http://invalid/assets',
 						plugins: [is({ format: 'esm' })],
 						platform: 'node',
@@ -59,7 +64,7 @@ describe('Test', () => {
 						entryPoints: [path.join(__dirname, `${test}.ts`)],
 						outdir: path.join(__dirname, 'build'),
 						bundle: true,
-						format: 'cjs',
+						format: 'esm',
 						publicPath: 'http://invalid/assets',
 						plugins: [is({ format: 'esm' })],
 						platform: 'node',
@@ -88,9 +93,11 @@ describe('Test', () => {
 							err[0] instanceof Object,
 							'Error description is not an object',
 						);
+						const expectedName =
+							'@exact-realty/esbuild-plugin-inline-js/';
 						assert.equal(
-							err[0].pluginName,
-							'@exact-realty/esbuild-plugin-inline-js',
+							err[0].pluginName?.slice(0, expectedName.length),
+							expectedName,
 						);
 					});
 			});
@@ -105,7 +112,7 @@ describe('Test', () => {
 						entryPoints: [path.join(__dirname, `${test}.ts`)],
 						outdir: path.join(__dirname, 'build'),
 						bundle: true,
-						format: 'cjs',
+						format: 'esm',
 						publicPath: 'http://invalid/assets',
 						plugins: [
 							is({

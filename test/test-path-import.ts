@@ -15,10 +15,13 @@
 
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import * as x from 'inline:./external.inline.ts';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 assert.notEqual(x.default, '');
 assert.equal(

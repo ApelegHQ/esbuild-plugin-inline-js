@@ -21,8 +21,11 @@ export default (
 		esbuild.BuildOptions,
 		'entryPoints' | 'outdir' | 'outfile' | 'write'
 	>,
+	filter?: RegExp,
 ): esbuild.Plugin => {
+	const mainFilter = filter ?? /^inline:/;
 	const skipResolve = {};
+	const instanceName = `${((0, Math.random)() * 1000) | 0}-${mainFilter}`;
 
 	config = { ...config };
 
@@ -32,12 +35,12 @@ export default (
 	delete (config as esbuild.BuildOptions).write;
 
 	return {
-		name: '@exact-realty/esbuild-plugin-inline-js',
+		name: `@exact-realty/esbuild-plugin-inline-js/${instanceName}`,
 		setup(build) {
 			build.onLoad(
 				{
-					filter: /.*/,
-					namespace: '@exact-realty/esbuild-plugin-inline-js/loader',
+					filter: /./,
+					namespace: `@exact-realty/esbuild-plugin-inline-js/loader/${instanceName}`,
 				},
 				async ({ path }) => {
 					const outfile = randomBytes(9).toString('base64url');
@@ -88,13 +91,13 @@ export default (
 				},
 			);
 
-			build.onResolve({ filter: /^inline:/ }, async (a) => {
+			build.onResolve({ filter: mainFilter }, async (a) => {
 				const { path, resolveDir, pluginData, namespace, kind } = a;
 				if (
 					kind === 'entry-point' ||
 					pluginData === skipResolve ||
 					namespace ===
-						'@exact-realty/esbuild-plugin-inline-js/loader'
+						`@exact-realty/esbuild-plugin-inline-js/loader/${instanceName}`
 				) {
 					return;
 				}
@@ -114,7 +117,7 @@ export default (
 
 				return {
 					external: false,
-					namespace: '@exact-realty/esbuild-plugin-inline-js/loader',
+					namespace: `@exact-realty/esbuild-plugin-inline-js/loader/${instanceName}`,
 					path: result.path,
 					suffix: undefined,
 					watchDirs: [],
@@ -125,11 +128,11 @@ export default (
 			build.onResolve(
 				{
 					filter: /.*/,
-					namespace: '@exact-realty/esbuild-plugin-inline-js/loader',
+					namespace: `@exact-realty/esbuild-plugin-inline-js/loader/${instanceName}`,
 				},
 				({ path, pluginData }) => ({
 					external: false,
-					namespace: '@exact-realty/esbuild-plugin-inline-js/content',
+					namespace: `@exact-realty/esbuild-plugin-inline-js/content/${instanceName}`,
 					path: path.replace(/\.inline\.[jt]sx?$/, '.js'),
 					pluginData: pluginData,
 				}),
@@ -137,8 +140,8 @@ export default (
 
 			build.onLoad(
 				{
-					filter: /.*/,
-					namespace: '@exact-realty/esbuild-plugin-inline-js/content',
+					filter: /./,
+					namespace: `@exact-realty/esbuild-plugin-inline-js/content/${instanceName}`,
 				},
 				({ pluginData }) => ({
 					contents: pluginData,
