@@ -1,4 +1,4 @@
-/* Copyright © 2021 Exact Realty Limited.
+/* Copyright © 2021 Apeleg Limited.
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -94,7 +94,7 @@ describe('Test', () => {
 							'Error description is not an object',
 						);
 						const expectedName =
-							'@exact-realty/esbuild-plugin-inline-js/';
+							'@apeleghq/esbuild-plugin-inline-js/';
 						assert.equal(
 							err[0].pluginName?.slice(0, expectedName.length),
 							expectedName,

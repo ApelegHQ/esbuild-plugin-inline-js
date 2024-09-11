@@ -5,14 +5,14 @@
  [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Exact-Realty_esbuild-plugin-inline-js&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Exact-Realty_esbuild-plugin-inline-js)
  [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Exact-Realty_esbuild-plugin-inline-js&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Exact-Realty_esbuild-plugin-inline-js)
  [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Exact-Realty_esbuild-plugin-inline-js&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Exact-Realty_esbuild-plugin-inline-js)
- ![NPM Downloads](https://img.shields.io/npm/dw/@exact-realty/esbuild-plugin-inline-js?style=flat-square)
+ ![NPM Downloads](https://img.shields.io/npm/dw/@apeleghq/esbuild-plugin-inline-js?style=flat-square)
 
 ## How to use
 
 ### Installing
 
 ```sh
-npm i -D @exact-realty/esbuild-plugin-inline-js
+npm i -D @apeleghq/esbuild-plugin-inline-js
 ```
 
 ### Configuring esbuild
@@ -20,20 +20,20 @@ npm i -D @exact-realty/esbuild-plugin-inline-js
 In the file you have your configuration, first import this plugin
 
 ```js
-const inlineJs = require('@exact-realty/esbuild-plugin-inline-js');
+const inlineJs = require('@apeleghq/esbuild-plugin-inline-js');
 ```
 
 Or using ES module syntax:
 
 ```js
-import inlineJs from '@exact-realty/esbuild-plugin-inline-js';
+import inlineJs from '@apeleghq/esbuild-plugin-inline-js';
 ```
 
 Then, in your esbuild configuration, add `inlineJs()` to the `plugins` list. `inlineJs` optionally takes an object that is passed to `esbuild.build`, with the exception of the following keys: `entryPoints`, `outdir`, `outfile` and `write`. Minimal example:
 
 ```js
 const esbuild = require('esbuild');
-const responsiveImages = require('@exact-realty/esbuild-plugin-inline-js');
+const responsiveImages = require('@apeleghq/esbuild-plugin-inline-js');
 
 await esbuild
 	.build({

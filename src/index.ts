@@ -1,4 +1,4 @@
-/* Copyright © 2022 Exact Realty Limited.
+/* Copyright © 2022 Apeleg Limited.
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -35,12 +35,12 @@ export default (
 	delete (config as esbuild.BuildOptions).write;
 
 	return {
-		name: `@exact-realty/esbuild-plugin-inline-js/${instanceName}`,
+		name: `@apeleghq/esbuild-plugin-inline-js/${instanceName}`,
 		setup(build) {
 			build.onLoad(
 				{
 					filter: /./,
-					namespace: `@exact-realty/esbuild-plugin-inline-js/loader/${instanceName}`,
+					namespace: `@apeleghq/esbuild-plugin-inline-js/loader/${instanceName}`,
 				},
 				async ({ path }) => {
 					const outfile = randomBytes(9).toString('base64url');
@@ -97,7 +97,7 @@ export default (
 					kind === 'entry-point' ||
 					pluginData === skipResolve ||
 					namespace ===
-						`@exact-realty/esbuild-plugin-inline-js/loader/${instanceName}`
+						`@apeleghq/esbuild-plugin-inline-js/loader/${instanceName}`
 				) {
 					return;
 				}
@@ -117,7 +117,7 @@ export default (
 
 				return {
 					external: false,
-					namespace: `@exact-realty/esbuild-plugin-inline-js/loader/${instanceName}`,
+					namespace: `@apeleghq/esbuild-plugin-inline-js/loader/${instanceName}`,
 					path: result.path,
 					suffix: undefined,
 					watchDirs: [],
@@ -128,11 +128,11 @@ export default (
 			build.onResolve(
 				{
 					filter: /.*/,
-					namespace: `@exact-realty/esbuild-plugin-inline-js/loader/${instanceName}`,
+					namespace: `@apeleghq/esbuild-plugin-inline-js/loader/${instanceName}`,
 				},
 				({ path, pluginData }) => ({
 					external: false,
-					namespace: `@exact-realty/esbuild-plugin-inline-js/content/${instanceName}`,
+					namespace: `@apeleghq/esbuild-plugin-inline-js/content/${instanceName}`,
 					path: path.replace(/\.inline\.[jt]sx?$/, '.js'),
 					pluginData: pluginData,
 				}),
@@ -141,7 +141,7 @@ export default (
 			build.onLoad(
 				{
 					filter: /./,
-					namespace: `@exact-realty/esbuild-plugin-inline-js/content/${instanceName}`,
+					namespace: `@apeleghq/esbuild-plugin-inline-js/content/${instanceName}`,
 				},
 				({ pluginData }) => ({
 					contents: pluginData,
