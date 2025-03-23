@@ -1,6 +1,6 @@
 {
   "name": "@apeleghq/esbuild-plugin-inline-js",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "esbuild plugin for inline scripts",
   "type": "module",
   "main": "dist/index.cjs",
@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lintFix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "build": "tsc --emitDeclarationOnly --declarationMap && node esbuild.mjs",
     "test": "node --loader ts-node/esm test/esbuild.test.ts",
     "prepack": "npm run build",
@@ -30,19 +30,21 @@
   "author": "Apeleg Limited",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^22.5.4",
-    "@typescript-eslint/eslint-plugin": "^8.5.0",
-    "@typescript-eslint/parser": "^8.5.0",
-    "esbuild": "^0.23.1",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "prettier": "^3.3.3",
+    "@eslint/js": "^9.23.0",
+    "@types/node": "^22.13.11",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "esbuild": "^0.25.1",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
-    "esbuild": "^0.17.0 || ^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0"
+    "esbuild": "^0.17.0 || ^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0|| ^0.23.0 || ^0.24.0 || ^0.25.0"
   },
   "keywords": [
     "esbuild",
