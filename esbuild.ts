@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S node --import ./loader.mjs
 
 /* Copyright © 2021 Apeleg Limited.
  *
@@ -47,7 +47,7 @@ await esbuild.build({
 	},
 });
 
-const cjsDeclarationFiles = async (directoryPath) => {
+const cjsDeclarationFiles = async (directoryPath: string) => {
 	const entries = await readdir(directoryPath, {
 		withFileTypes: true,
 		recursive: true,
