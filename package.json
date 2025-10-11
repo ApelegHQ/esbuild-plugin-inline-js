@@ -1,6 +1,6 @@
 {
   "name": "@apeleghq/esbuild-plugin-inline-js",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "esbuild plugin for inline scripts",
   "type": "module",
   "main": "dist/index.cjs",
